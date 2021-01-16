@@ -25,7 +25,11 @@
           </div>
           <p [innerHTML]="b.description"></p>
           <div>
-            <button mat-flat-button color="primary" (click)="addBookToReadingList(b)" [disabled]="b.isAdded">
+            <button mat-flat-button color="primary" (click)="removeBookFromReadingList(b, 'Removed from the List')" [disabled]="!b.isAdded">
+              Remove from List
+            </button>
+
+            <button mat-flat-button color="primary" (click)="addBookToReadingList(b, 'Added to the List')" [disabled]="b.isAdded">
               Want to Read
             </button>
           </div>
