@@ -1,3 +1,9 @@
+# Improvements:
+- Filter options can be provided like publishedDate, and high rating books.
+- Custom Error handling is missing.
+- Unused code.
+- e2e testing is not working in my local.
+
 # Code_Review:
 
 ##### Accessibility Issue:
