@@ -8,14 +8,10 @@
       <div class="reading-list-item--details--author">
         {{ b.authors.join(',') }}
       </div>
+      <p *ngIf="b.finishedDate">Finished on {{formatDate(b.finishedDate)}} </p>
     </div>
     <div>
-      <button
-        mat-icon-button
-        color="warn"
-        [attr.aria-label]="'Remove ' + b.title + ' from reading list'"
-        (click)="removeFromReadingList(b)"
-      >
+      <button mat-icon-button color="warn" [attr.aria-label]="'Remove ' + b.title + ' from reading list'" (click)="removeFromReadingList(b)">
         <mat-icon>remove_circle</mat-icon>
       </button>
     </div>

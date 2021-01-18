@@ -9,6 +9,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TotalCountComponent } from './total-count/total-count.component';
 import { ReadingListComponent } from './reading-list/reading-list.component';
 
@@ -26,6 +27,7 @@ const EXPORTS = [
     MatIconModule,
     MatInputModule,
     MatSnackBarModule,
+    MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
@@ -36,4 +38,4 @@ const EXPORTS = [
   exports: [...EXPORTS],
   declarations: [...EXPORTS]
 })
-export class BooksFeatureModule {}
+export class BooksFeatureModule { }

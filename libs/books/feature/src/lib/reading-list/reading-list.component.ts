@@ -13,7 +13,12 @@ export class ReadingListComponent {
   constructor(private readonly store: Store) { }
 
   removeFromReadingList(item) {
-    console.log("Remove form list::::" + item);
     this.store.dispatch(removeFromReadingList({ item }));
+  }
+
+  formatDate(date: void | string) {
+    return date
+      ? new Intl.DateTimeFormat('en-US').format(new Date(date))
+      : undefined;
   }
 }
