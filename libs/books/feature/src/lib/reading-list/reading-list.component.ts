@@ -10,9 +10,10 @@ import { getReadingList, removeFromReadingList } from '@tmo/books/data-access';
 export class ReadingListComponent {
   readingList$ = this.store.select(getReadingList);
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store) { }
 
   removeFromReadingList(item) {
+    console.log("Remove form list::::" + item);
     this.store.dispatch(removeFromReadingList({ item }));
   }
 }
