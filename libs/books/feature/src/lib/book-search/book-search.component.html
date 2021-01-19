@@ -1,6 +1,6 @@
 <form [formGroup]="searchForm" (submit)="searchBooks()">
   <mat-form-field floatLabel="never">
-    <input autoFocus matInput type="search" placeholder="Search for books to add to your reading list" formControlName="term" />
+    <input autoFocus matInput type="search" [(ngModel)]="instantSearch" (ngModelChange)="instantSearchBooks()" placeholder="Search for books to add to your reading list" formControlName="term" />
     <button mat-icon-button matSuffix aria-label="search">
       <mat-icon>search</mat-icon>
     </button>

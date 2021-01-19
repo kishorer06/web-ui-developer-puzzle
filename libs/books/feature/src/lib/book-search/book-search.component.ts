@@ -9,6 +9,8 @@ import {
 } from '@tmo/books/data-access';
 import { FormBuilder } from '@angular/forms';
 import { Book } from '@tmo/shared/models';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'tmo-book-search',
@@ -17,7 +19,8 @@ import { Book } from '@tmo/shared/models';
 })
 export class BookSearchComponent implements OnInit {
   books: ReadingListBook[];
-
+  instantSearch: string;
+  instantSearchChanged = new Subject<string>();
   searchForm = this.fb.group({
     term: ''
   });
@@ -25,7 +28,11 @@ export class BookSearchComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly fb: FormBuilder
-  ) {}
+  ) {
+    this.instantSearchChanged.pipe(debounceTime(500)).subscribe(() => {
+      this.store.dispatch(searchBooks({ term: this.instantSearch }));
+    });
+  }
 
   get searchTerm(): string {
     return this.searchForm.value.term;
@@ -50,6 +57,10 @@ export class BookSearchComponent implements OnInit {
   searchExample() {
     this.searchForm.controls.term.setValue('javascript');
     this.searchBooks();
+  }
+
+  instantSearchBooks() {
+    this.instantSearchChanged.next();
   }
 
   searchBooks() {
