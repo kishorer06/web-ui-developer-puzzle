@@ -12,7 +12,7 @@ import { Book, ReadingListItem } from '@tmo/shared/models';
 export const getReadingListState = createFeatureSelector<
   ReadingListPartialState,
   State
->(READING_LIST_FEATURE_KEY);
+  >(READING_LIST_FEATURE_KEY);
 
 const {
   selectEntities,
@@ -26,7 +26,9 @@ export const getReadingListEntities = createSelector(
 );
 
 export interface ReadingListBook extends Book, Omit<ReadingListItem, 'bookId'> {
+  [x: string]: boolean;
   isAdded: boolean;
+
 }
 
 export const getAllBooks = createSelector<
@@ -34,9 +36,9 @@ export const getAllBooks = createSelector<
   Book[],
   Record<string, ReadingListItem>,
   ReadingListBook[]
->(getBooks, getReadingListEntities, (books, entities) => {
-  return books.map(b => ({ ...b, isAdded: Boolean(entities[b.id]) }));
-});
+  >(getBooks, getReadingListEntities, (books, entities) => {
+    return books.map(b => ({ ...b, isAdded: Boolean(entities[b.id]) }));
+  });
 
 export const getReadingList = createSelector(getReadingListState, selectAll);
 

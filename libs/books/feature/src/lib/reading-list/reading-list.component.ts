@@ -10,9 +10,15 @@ import { getReadingList, removeFromReadingList } from '@tmo/books/data-access';
 export class ReadingListComponent {
   readingList$ = this.store.select(getReadingList);
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store) { }
 
   removeFromReadingList(item) {
     this.store.dispatch(removeFromReadingList({ item }));
+  }
+
+  formatDate(date: void | string) {
+    return date
+      ? new Intl.DateTimeFormat('en-US').format(new Date(date))
+      : undefined;
   }
 }

@@ -23,9 +23,26 @@ export class ReadingListService {
     });
   }
 
+  async finshedBook(id: string, finishedDate: Date, b: Book): Promise<void> {
+    this.storage.update(list => {
+      const { id, ...rest } = b;
+      list.push({
+        bookId: id,
+        finished: true,
+        finishedDate: finishedDate.toString(),
+        ...rest
+      });
+      return list;
+    });
+  }
+
   async removeBook(id: string): Promise<void> {
     this.storage.update(list => {
-      return list.filter(x => x.bookId !== id);
+      return list.filter(x => {
+        x.bookId !== id;
+        x.finished = false;
+        x.finishedDate = '';
+      });
     });
   }
 }

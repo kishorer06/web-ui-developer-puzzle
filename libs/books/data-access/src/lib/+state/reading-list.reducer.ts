@@ -17,9 +17,9 @@ export interface ReadingListPartialState {
 
 export const readingListAdapter: EntityAdapter<ReadingListItem> = createEntityAdapter<
   ReadingListItem
->({
-  selectId: item => item.bookId
-});
+  >({
+    selectId: item => item.bookId
+  });
 
 export const initialState: State = readingListAdapter.getInitialState({
   loaded: false,
@@ -49,6 +49,9 @@ const readingListReducer = createReducer(
   }),
   on(ReadingListActions.addToReadingList, (state, action) =>
     readingListAdapter.addOne({ bookId: action.book.id, ...action.book }, state)
+  ),
+  on(ReadingListActions.finishedReadingItem, (state, action) =>
+    readingListAdapter.addOne({ bookId: action.book.id, finished: true, finishedDate: new Date().toString(), ...action.book }, state)
   ),
   on(ReadingListActions.removeFromReadingList, (state, action) =>
     readingListAdapter.removeOne(action.item.bookId, state)
